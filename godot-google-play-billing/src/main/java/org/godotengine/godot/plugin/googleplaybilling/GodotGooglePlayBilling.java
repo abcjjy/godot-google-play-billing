@@ -30,6 +30,9 @@
 
 package org.godotengine.godot.plugin.googleplaybilling;
 
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import org.godotengine.godot.Dictionary;
 import org.godotengine.godot.Godot;
 import org.godotengine.godot.plugin.GodotPlugin;
@@ -49,6 +52,7 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.GetBillingConfigParams;
 import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
@@ -315,7 +319,23 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 		signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String.class));
 		signals.add(new SignalInfo("purchase_consumed", String.class));
 		signals.add(new SignalInfo("purchase_consumption_error", Integer.class, String.class, String.class));
+		signals.add(new SignalInfo("billing_config_response", Dictionary.class));
 
 		return signals;
+	}
+
+	@UsedByGodot
+	public void getBillingConfig() {
+		GetBillingConfigParams params = GetBillingConfigParams.newBuilder().build();
+		billingClient.getBillingConfigAsync(params, (billingResult, billingConfig) -> {
+			Dictionary r = new Dictionary();
+			r.put("status", billingResult.getResponseCode());
+			r.put("debug_message", billingResult.getDebugMessage());
+			if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && billingConfig != null) {
+				String countryCode = billingConfig.getCountryCode();
+				r.put("country_code", countryCode);
+			}
+			emitSignal("billing_config_response", r);
+		});
 	}
 }

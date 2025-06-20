@@ -31,5 +31,6 @@ android {
 dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation 'com.android.billingclient:billing:7.0.0'
-    compileOnly fileTree(dir: 'libs', include: ['godot-lib*.aar'])
+    implementation "org.godotengine:godot:4.4.1.stable"
+//    compileOnly fileTree(dir: 'libs', include: ['godot-lib*.aar'])
 }
