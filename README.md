@@ -1,23 +1,30 @@
-# godot-google-play-billing
+# GodotGooglePlayBilling
 Godot Android plugin for the Google Play Billing library
 
+**Note: The master branch supports Godot 4.2 and above. For older Godot versions, use the [1.x](https://github.com/godot-sdk-integrations/godot-google-play-billing/tree/1.x) branch and 1.x releases.**
 
-## Usage & Docs
+## Quick Start
 
-You can find the docs for this first-party plugin in the [official Godot docs](https://docs.godotengine.org/en/stable/tutorials/platform/android_in_app_purchases.html).
+### 1. Install the Plugin
 
+- Download the latest release from the [Releases](https://github.com/godot-sdk-integrations/godot-google-play-billing/releases) page.
 
-## Compiling
+- Unzip and copy the plugin to your project’s `addons` folder:
 
-Prerequisites:
+	```
+	your_project/addons/GodotGooglePlayBilling/
+	```
 
-- Android SDK (platform version 30)
-- the Godot Android library (`godot-lib.***.release.aar`) for your version of Godot from the [downloads page](https://godotengine.org/download).
+- In Godot Editor, go to: **Project > Project Settings > Plugins**, and enable **GodotGooglePlayBilling**.
 
-Steps to build:
+---
 
-1. Clone this Git repository
-2. Put `godot-lib.***.release.aar` in `./godot-google-play-billing/libs/`
-3. Run `./gradlew build` in the cloned repository
+### 3. Enable Gradle Build for Android Export
 
-If the build succeeds, you can find the resulting `.aar` files in `./godot-google-play-billing/build/outputs/aar/`.
+In Godot, go to: **Project > Export > Android > gradle/use_gradle_build** and enable it.
+
+---
+
+## Documentation
+
+Full documentation is available at: https://docs.godotengine.org/en/latest/tutorials/platform/android/android_in_app_purchases.html
